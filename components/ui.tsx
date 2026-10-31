@@ -1,4 +1,8 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export function Panel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <section className={`rounded-sm border border-line bg-white shadow-panel ${className}`}>{children}</section>;
@@ -35,10 +39,9 @@ export function LoadingState({ label = "Loading verified analytics..." }: { labe
 }
 
 export function ErrorState({ message }: { message: string }) {
-  return (
-    <div className="rounded-sm border border-[#f1cdcd] bg-[#fff8f8] px-5 py-4 text-sm text-coral">
-      <p className="font-bold">Unable to load this view</p>
-      <p className="mt-1 text-[#9e5151]">{message}</p>
-    </div>
-  );
+  useEffect(() => {
+    toast.error(message, { id: `error-${message}` });
+  }, [message]);
+
+  return null;
 }

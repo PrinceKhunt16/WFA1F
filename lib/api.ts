@@ -24,7 +24,7 @@ async function get<T>(path: string): Promise<T> {
   try {
     response = await fetch(`${API_URL}${path}`, { cache: "no-store" });
   } catch {
-    throw new ApiError("The analytics service is unavailable. Check that the FastAPI backend is running.");
+    throw new ApiError("The analytics service is unavailable.");
   }
 
   const body = await response.json().catch(() => null);
